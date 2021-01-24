@@ -381,7 +381,20 @@ class Bar(Gap, configurable.Configurable):
                     self.drawer.draw(offsetx=end, width=self.length - end)
                 else:
                     self.drawer.draw(offsety=end, height=self.length - end)
+        
+        self.drawer.set_source_rgb("800000")
 
+        # The drawer is the size of the whole bar so, to draw the border at the
+        # bottom of the bar, I've drawn the border at the top of the drawer and
+        # then placed it at the bottom of the bar. Ugly.
+        self.drawer.fillrect(0,
+                             0,
+                             self.width,
+                             2,
+                             2)
+
+        self.drawer.draw(offsetx=0, offsety=self.height-2, height=2, width=self.width)
+        
     def info(self):
         return dict(
             size=self.size,
